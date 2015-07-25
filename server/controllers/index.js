@@ -16,7 +16,7 @@ module.exports = {
       // models.messages.get(function(){
       //   console.log('hi dad');
       models.messages.get(function(rows){
-
+        // res.end("get request sent in messages");
         var result = {results: rows};
 
         res.end(JSON.stringify(result));
@@ -27,10 +27,13 @@ module.exports = {
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       
-      
-      models.users.post(function(){
-        res.end('what up alskdjf;laksdjf');
-      });
+      // console.log("req.body in controllers post --------->", req.body);
+
+      var message = JSON.stringify(req.body['message']);
+      var username = JSON.stringify(req.body['username']);
+      var roomname = JSON.stringify(req.body['roomname']);
+      // console.log("OUR INPUTS --->", message, username, roomname);
+      models.messages.post(message, username, roomname);
 
       // create connection to database
 
@@ -44,33 +47,17 @@ module.exports = {
     get: function (req, res) {
 
 
-      models.users.get(function(){
-        res.end('What is the ');
+      models.users.get(function(rows){
+        // res.end('What is the ');
+        var result = {results: rows};
+        res.end(JSON.stringify(result));
       });
-      // res.send('GET request');
-      // models.users.get(function(rows));
+      res.send('GET request');
     },
     post: function (req, res) {
 
       models.users.post(JSON.stringify(req.body['username']));
 
-      // connection.connect();
-      // console.log('Inside users POST. Inside Model. body=', req.body);
-      
-      // connection.query("INSERT INTO users (name) VALUES ('" + req.body['username'] + "')", function() {
-      //   console.log('-------> it is in users POST');
-        
-      // });
-
-
-      // connection.end();
-
-
-      // models.users.post(function(){
-      //   res.end('what up alskdjf;laksdjf');
-      // });
-
-      // console.log('Inside users POST. body=', req.body);
       res.send('POST request');
     }
   }

@@ -1,44 +1,38 @@
 var db = require('../db');
 // var mysql = require('mysql');
-var connection = db.dbConnection();
 
 
 module.exports = {
   messages: {
     get: function (callback) {
+      var connection = db.dbConnection();
       console.log("GET FUNCTION IS WORKING");
       
       connection.connect();
 
       connection.query("SELECT * FROM messages", function(err, rows, fields){
         if (!err) {
+          console.log("ALL THE ROWS", rows);
           callback(rows);
         } else {
           console.log("Error fetching message");
         }
-        // if (err) throw err;
-        // callback(rows);
       });
 
       connection.end();
 
-      // console.log('hi mom');
-      // if(callback) {
-      //   callback();        
-      // }
-      // dbConnection.query()
+
     }, // a function which produces all the messages
-    post: function () {
+    post: function (message, username, roomname) {
+      var connection = db.dbConnection();
 
       connection.connect();
-
-      connection.query("INSERT INTO messages (message) VALUES ('hello')", function() {
-        console.log('-------> it is in messages POST');
+      // console.log("------->messages table, post function inside models got called");
+      // console.log("------->", message);
+      connection.query("INSERT INTO messages (message, username, roomname) VALUES (" + message + "," + username + "," + roomname + ")", function(){
+        // console.log('----- > it is in messages POST');
       });
-      //   , function(err, rows, fields){
-      //   if (err) throw err;
-      //   callback(rows);
-      // });
+        // + ',' + username + ',' + roomname 
 
       connection.end();
 
@@ -48,7 +42,7 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function (callback) {
-      // res.end('what up alskdjf;laksdjf');
+      var connection = db.dbConnection();
       connection.connect();
       
       connection.query("SELECT * FROM users", function(err, rows, fields){
@@ -59,32 +53,19 @@ module.exports = {
         }; // if
       });
 
-      callback();
+      // callback();
 
-      // connection.end();
+      connection.end();
 
 
     },
     post: function (username) {
-      console.log("------->post function inside models got called");
+      var connection = db.dbConnection();
+
       connection.connect();
-      // console.log('Inside users POST. Inside Model. body=', req.body);
       connection.query("INSERT INTO users (name) VALUES (" + username + ")", function() {
-        console.log('-------> it is in users POST');
-        
       });
       connection.end();
-      // connection.connect();
-      // // console.log('Inside users POST. Inside Model. body=', req.body);
-      
-      // connection.query("INSERT INTO users (name) VALUES ('hello')", function() {
-      //   console.log('-------> it is in users POST');
-        
-      // });
-
-
-      // connection.end();
-
     } //post
   } //get
 }; //module.export
