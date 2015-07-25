@@ -15,11 +15,11 @@ CREATE TABLE users (
   name VARCHAR(30)
 );
 
-CREATE TABLE rooms (
-  /* Describe your table here.*/
-  ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  roomName VARCHAR(15)
-);
+-- CREATE TABLE rooms (
+--   /* Describe your table here.*/
+--   ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--   roomName VARCHAR(15)
+-- );
 
 
 
