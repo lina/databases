@@ -1,16 +1,13 @@
 var db = require('../db');
-var mysql = require('mysql');
+// var mysql = require('mysql');
+var connection = db.dbConnection();
 
-// var dbConnection = mysql.createConnection();
-// dbConnection.connect();
 
 module.exports = {
   messages: {
     get: function (callback) {
       console.log("GET FUNCTION IS WORKING");
-
-      var connection = db.dbConnection();
-
+      
       connection.connect();
 
       connection.query("SELECT * FROM messages", function(err, rows, fields){
@@ -33,12 +30,10 @@ module.exports = {
     }, // a function which produces all the messages
     post: function () {
 
-      var connection = db.dbConnection();
-
       connection.connect();
 
       connection.query("INSERT INTO messages (message) VALUES ('hello')", function() {
-        console.log('-------> it is here');
+        console.log('-------> it is in messages POST');
       });
       //   , function(err, rows, fields){
       //   if (err) throw err;
@@ -52,8 +47,37 @@ module.exports = {
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function () {}
-  }
-};
+    get: function (callback) {
+      // res.end('what up alskdjf;laksdjf');
+      connection.connect();
+      
+      connection.query("SELECT * FROM users", function(err, rows, fields){
+        if (!err) {
+          callback(rows);
+        } else {
+          console.log("Error fetching username");
+        }; // if
+      });
+
+      callback();
+
+      // connection.end();
+
+
+    },
+    post: function (callback) {
+      connection.connect();
+      // console.log('Inside users POST. Inside Model. body=', req.body);
+      
+      connection.query("INSERT INTO users (name) VALUES ('hello')", function() {
+        console.log('-------> it is in users POST');
+        
+      });
+
+
+      connection.end();
+
+    } //post
+  } //get
+}; //module.export
 
