@@ -22,16 +22,16 @@ module.exports = {
       
       // console.log("req.body in controllers post --------->", req.body);
 
-      var message = JSON.stringify(req.body['message']);
+      var text = JSON.stringify(req.body['text']);
       var username = JSON.stringify(req.body['username']);
       var roomname = JSON.stringify(req.body['roomname']);
       // console.log("OUR INPUTS --->", message, username, roomname);
-      models.messages.post(message, username, roomname);
+      models.messages.post(text, username, roomname);
 
       // create connection to database
 
       // insert data into the table
-      res.send('POST request');
+      res.send(req.body);
     } // a function which handles posting a message to the database
   },
 
@@ -47,7 +47,7 @@ module.exports = {
 
       models.users.post(JSON.stringify(req.body['username']));
 
-      res.send('POST request');
+      res.send(req.body);
     }
   }
 };

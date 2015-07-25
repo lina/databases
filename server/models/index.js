@@ -22,13 +22,13 @@ module.exports = {
 
 
     }, // a function which produces all the messages
-    post: function (message, username, roomname) {
+    post: function (text, username, roomname) {
       var connection = db.dbConnection();
 
       connection.connect();
       // console.log("------->messages table, post function inside models got called");
       // console.log("------->", message);
-      connection.query("INSERT INTO messages (message, username, roomname) VALUES (" + message + "," + username + "," + roomname + ")", function(){
+      connection.query("INSERT INTO messages (text, username, roomname) VALUES (" + text + "," + username + "," + roomname + ")", function(){
         console.log('----- > messages POST executed');
       });
         // + ',' + username + ',' + roomname 

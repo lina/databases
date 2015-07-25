@@ -7,7 +7,7 @@ var mysql = require('mysql');
 exports.dbConnection = function(){
   return mysql.createConnection({
     user: "root",
-    password: "",
+    password: "password",
     database: "chat"
   });
 };
