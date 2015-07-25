@@ -3,9 +3,9 @@ var bluebird = require('bluebird');
 // var db = require('./db');
 // var dbConnection = mysql.createConnection();
 // dbConnection.connect();
-var db = require('../db');
+// var db = require('../db');
 // var mysql = require('mysql');
-var connection = db.dbConnection();
+// var connection = db.dbConnection();
 
 // console.log("*********************");
 module.exports = {
@@ -51,16 +51,19 @@ module.exports = {
       // models.users.get(function(rows));
     },
     post: function (req, res) {
-      connection.connect();
+
+      models.users.post(JSON.stringify(req.body['username']));
+
+      // connection.connect();
       // console.log('Inside users POST. Inside Model. body=', req.body);
       
-      connection.query("INSERT INTO users (name) VALUES ('" + req.body['username'] + "')", function() {
-        console.log('-------> it is in users POST');
+      // connection.query("INSERT INTO users (name) VALUES ('" + req.body['username'] + "')", function() {
+      //   console.log('-------> it is in users POST');
         
-      });
+      // });
 
 
-      connection.end();
+      // connection.end();
 
 
       // models.users.post(function(){

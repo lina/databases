@@ -65,17 +65,25 @@ module.exports = {
 
 
     },
-    post: function (callback) {
+    post: function (username) {
+      console.log("------->post function inside models got called");
       connection.connect();
       // console.log('Inside users POST. Inside Model. body=', req.body);
-      
-      connection.query("INSERT INTO users (name) VALUES ('hello')", function() {
+      connection.query("INSERT INTO users (name) VALUES (" + username + ")", function() {
         console.log('-------> it is in users POST');
         
       });
-
-
       connection.end();
+      // connection.connect();
+      // // console.log('Inside users POST. Inside Model. body=', req.body);
+      
+      // connection.query("INSERT INTO users (name) VALUES ('hello')", function() {
+      //   console.log('-------> it is in users POST');
+        
+      // });
+
+
+      // connection.end();
 
     } //post
   } //get
