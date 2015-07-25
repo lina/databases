@@ -11,19 +11,12 @@ var bluebird = require('bluebird');
 module.exports = {
   messages: {
     get: function (req, res) {
-      console.log("********************* check ");
-
-      // models.messages.get(function(){
-      //   console.log('hi dad');
       models.messages.get(function(rows){
-        // res.end("get request sent in messages");
         var result = {results: rows};
-
+        res.send(JSON.stringify(result));
         res.end(JSON.stringify(result));
-      });
 
-      // })
-      res.send('GET request');
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       
@@ -43,16 +36,12 @@ module.exports = {
   },
 
   users: {
-    // Ditto as above
     get: function (req, res) {
-
-
       models.users.get(function(rows){
-        // res.end('What is the ');
         var result = {results: rows};
+        res.send(JSON.stringify(result));
         res.end(JSON.stringify(result));
       });
-      res.send('GET request');
     },
     post: function (req, res) {
 

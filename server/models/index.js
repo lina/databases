@@ -6,8 +6,7 @@ module.exports = {
   messages: {
     get: function (callback) {
       var connection = db.dbConnection();
-      console.log("GET FUNCTION IS WORKING");
-      
+      console.log("---- > messages GET executed");
       connection.connect();
 
       connection.query("SELECT * FROM messages", function(err, rows, fields){
@@ -30,7 +29,7 @@ module.exports = {
       // console.log("------->messages table, post function inside models got called");
       // console.log("------->", message);
       connection.query("INSERT INTO messages (message, username, roomname) VALUES (" + message + "," + username + "," + roomname + ")", function(){
-        // console.log('----- > it is in messages POST');
+        console.log('----- > messages POST executed');
       });
         // + ',' + username + ',' + roomname 
 
