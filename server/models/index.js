@@ -6,7 +6,6 @@ module.exports = {
   messages: {
     get: function (callback) {
       var connection = db.dbConnection();
-      console.log("---- > messages GET executed");
       connection.connect();
 
       connection.query("SELECT * FROM messages", function(err, rows, fields){
@@ -17,24 +16,16 @@ module.exports = {
           console.log("Error fetching message");
         }
       });
-
       connection.end();
-
-
     }, // a function which produces all the messages
     post: function (text, username, roomname) {
       var connection = db.dbConnection();
-
+      console.log("-------------> messages POST was executed");
       connection.connect();
-      // console.log("------->messages table, post function inside models got called");
-      // console.log("------->", message);
       connection.query("INSERT INTO messages (text, username, roomname) VALUES (" + text + "," + username + "," + roomname + ")", function(){
-        console.log('----- > messages POST executed');
+        // console.log('----- > messages POST executed');
       });
-        // + ',' + username + ',' + roomname 
-
       connection.end();
-
     } // a function which can be used to insert a message into the database
   },
 
@@ -51,12 +42,7 @@ module.exports = {
           console.log("Error fetching username");
         }; // if
       });
-
-      // callback();
-
       connection.end();
-
-
     },
     post: function (username) {
       var connection = db.dbConnection();
